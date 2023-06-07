@@ -17,10 +17,10 @@ window.onload = async (event) => {
         let tbody = document.getElementById('tbody');
         let newtr = document.createElement("tr")
         newtr.innerHTML = `
-            <td id="t-name">${x.name}</td>
-            <td id="t-office">${x.office}</td>
-            <td id="t-pos">${x.position}</td>
-            <td id="t-sal">${x.salary}</td>`
+            <td>${x.name}</td>
+            <td>${x.office}</td>
+            <td>${x.position}</td>
+            <td>${x.salary}</td>`
         tbody.appendChild(newtr)
     }
 

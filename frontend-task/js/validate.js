@@ -19,17 +19,12 @@ function check() {
     if ((email.value != '') ? (!email.value.includes('@') && !email.value.includes('.')) : '')
         email_error.textContent = "Email is Not Valid"
 
-    if (email.value === f_email) {
-        email_error.style.color = 'green'
-        email_error.textContent = "Email is Valid"
-    }
-
     if ((password.value != '') ? password.value != f_pass : '')
         pass_error.textContent = "Password Not Found"
 
-    if ((password.value != '') ? password.value === f_pass : '') {
-        pass_error.style.color = 'green'
-        pass_error.textContent = "Password is Valid"
-    }
+}
 
+
+function gotoPage(){
+    window.location.href = "../hello.html"
 }
