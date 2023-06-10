@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+*:focus {
+    outline: none;
+}
+
+.header-line {
+    height: 4px;
+    background-color: rgb(255, 255, 255);
+}
+
+.container {
+    display: flex;
+}
+
+.form-div {
+    width: 35%;
+    padding: 12px;
+}
+
+.output-div {
+    height: 99vh;
+    width: 65%;
+    padding: 12px;
+}
+
+.form {
+    margin-top: 12px;
+}
+
+.label {
+    color: #54626F;
+    display: block;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    padding-top: 18px;
+}
+
+/* Styling for input type  */
+.input {
+    display: block;
+    font-size: 18px;
+    height: 42px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    padding: 0px 4px;
+    width: 100%;
+    border: 2px solid darkgray;
+    border-radius: 8px;
+}
+
+
+
+/* Removing default arrows input type Number  */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.form-buttons {
+    padding-top: 24px;
+}
+
+.add-data-btn {
+    background-color: darkgreen;
+    color: white;
+    font-size: 18px;
+    padding: 10px 82px;
+    width: 100%;
+    cursor: pointer;
+    margin: 12px 0px;
+    border-radius: 8px;
+    border: none;
+}
+
+.add-data-btn:active {
+    background-color: rgb(0, 39, 0);
+}
+
+.reset-btn {
+    background-color: darkgray;
+    font-size: 18px;
+    padding: 10px 82px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+}
+
+.reset-btn:active {
+    background-color: rgb(102, 102, 102);
+}
+
+.table-div {
+    margin-top: 18px;
+    overflow-y: auto;
+    height: 88vh;
+}
+
+table {
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f83939;
+    color: white;
+    letter-spacing: 1px;
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+    padding: 8px 0px;
+    position: sticky;
+    top: 0;
+}
+
+th::after,
+th::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+th::before {
+  top: 0;
+  border-top: 2px solid gray;
+  margin-top: -0.5px;
+}
+
+th::after {
+  bottom: 0;
+  border-bottom: 2px solid gray;
+}
+
+td {
+    border: 2px solid gray;
+    padding: 6px 0px;
+}

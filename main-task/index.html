@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📕 Employee Portal</title>
+    <link rel="stylesheet" href="./css/global.css">
+</head>
+
+<body>
+    <div class="header-line"></div>
+    <main class="container">
+        <div class="form-div">
+            <h3>FORM 📜</h3>
+            <div class="form">
+                <label for="id" class="label">Employee Id:</label>
+                <input oninput="checkId()" type="number" class="input" name="id" id="id">
+                <p class="error p-error-id"></p>
+
+                <label for="name" class="label">Employee Name:</label>
+                <input oninput="checkName()" type="text" class="input" name="name" id="name">
+                <p class="p-error-name"></p>
+
+                <label for="age" class="label">Employee Age:</label>
+                <input oninput="checkAge()" type="number" class="input" name="age" min="18" max="65" id="age">
+                <p class="p-error-age"></p>
+
+                <label for="gender" class="label">Employee Gender:</label>
+                <select class="input" name="gender" id="gender">
+                    <option class="default-select">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
+                </select>
+
+                <div class="form-buttons">
+                    <button class="add-data-btn">Add Data</button>
+                    <button class="reset-btn">Reset Form</button>
+                </div>
+            </div>
+        </div>
+        <div class="output-div">
+            <h3>EMPLOYEE LIST 📕</h3>
+            <div class="table-div">
+                <table class="table">
+                    <thead>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Employee Age</th>
+                        <th>Employee Gender</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>dcyec</td>
+                            <td>dcyec</td>
+                            <td>dcyec</td>
+                            <td>dcyec</td>
+                            <td>dcydewfewfewfec</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>
