@@ -44,7 +44,10 @@ function checkId(val) {
     let empIdValModal = Number(empIdModal.value)
     let empIdVal = Number(empId.value)
 
-    let isAlreadyInDeleted = deletedIds.find(id => id === empIdVal) ? true : false;
+    let isAlreadyInDeleted = deletedIds.find(id => id == empIdVal) ? true : false;
+    let isAlreadyInUsed = employees.find(employee => employee.id == empIdVal) ? true : false;
+
+    console.log(isAlreadyInDeleted);
 
     if (val == 'modal') {
         if (empIdValModal < 0) {
@@ -66,7 +69,10 @@ function checkId(val) {
             errorId.textContent = "Employee ID should Not Empty.";
             showDisabled = true;
         } else if (isAlreadyInDeleted) {
-            errorId.textContent = "Employee ID should not be repeated.";
+            errorId.textContent = "Employee ID already used and Deleted.";
+            showDisabled = true;
+        } else if(isAlreadyInUsed){
+            errorId.textContent = "Employee ID already Used for Another Employee.";
             showDisabled = true;
         } else {
             errorId.textContent = "";

@@ -144,14 +144,15 @@ function editData() {
     employees[arrNoModal.value].age = empAgeModal.value;
     employees[arrNoModal.value].gender = empGenderModal.value;
 
-    if (temp == employees[arrNoModal.value].id)
-        updatedIds.push(temp)
+    // if (temp == employees[arrNoModal.value].id)
+    //     updatedIds.push(temp)
 
     sortTable();
 }
 
 
 function deleteData(val) {
+    deletedIds.push(employees[val].id)
 
 
     let newArray = employees.filter((employee) => {
@@ -163,6 +164,11 @@ function deleteData(val) {
     console.log(newArray)
 
     sortTable();
+
+    console.log(val)
+
+    
+    console.log(deletedIds)
 
 
     if (tbody.childElementCount == 0) {
