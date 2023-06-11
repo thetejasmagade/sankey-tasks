@@ -1,8 +1,10 @@
 // Main Array of Objects
 let employees = [];
 
-// Updated ID's Entry
-let updatedIds = [];
+// deleted ID's Entry
+let deletedIds = [];
+
+// 
 
 
 // Show heading when list is empty
@@ -21,25 +23,25 @@ function emptyListHeadingFn() {
 }
 
 
-
+// Sort the arrays and modify showModal(i) value according to it
 function sortArray(val) {
     if (val == 'inc') {
         employees.sort((a, b) => a.id - b.id);
 
         for (var i = employees.length - 1; i >= 0; i--) {
-            employees[i].actions = `<button onclick="showModal(${i})">EDIT</button><button>DELETE</button>`
+            employees[i].actions = `<button onclick="showModal(${i})">EDIT</button><button onclick="deleteData(${i})">DELETE</button>`
         }
     }
     else {
         employees.sort((a, b) => b.id - a.id);
 
         for (var i = 0; i < employees.length; i++) {
-            employees[i].actions = `<button onclick="showModal(${i})">EDIT</button><button>DELETE</button>`;
+            employees[i].actions = `<button onclick="showModal(${i})">EDIT</button><button onclick="deleteData(${i})">DELETE</button>`;
         }
     }
 }
 
-
+// Sort the table and show on the page
 function sortTable() {
     var childTr = tbody.lastElementChild;
     while (childTr) {
@@ -78,7 +80,7 @@ function showModal(val) {
     empGenderModal.value = employees[val].gender;
     arrNoModal.value = val
 
-    console.log(thatTr)
+
     isAllDataFilled('modal')
 }
 
@@ -101,7 +103,7 @@ function addData() {
         name: empName.value,
         age: Number(empAge.value),
         gender: empGender.value,
-        actions: `<button onclick="showModal(${employees.length-1})">EDIT</button><button>DELETE</button>`
+        actions: `<button onclick="showModal(${employees.length - 1})">EDIT</button><button onclick="deleteData(${employees.length - 1})">DELETE</button>`
     })
 
     emptyListHeadingFn();
@@ -113,7 +115,7 @@ function addData() {
         <td>${empName.value}</td>
         <td>${empAge.value}</td>
         <td>${empGender.value}</td>
-        <td><button onclick="showModal(${employees.length-1})">EDIT</button><button>DELETE</button></td>
+        <td><button onclick="showModal(${employees.length - 1})">EDIT</button><button onclick="deleteData(${employees.length - 1})">DELETE</button></td>
         
     `
     tbody.append(newTrElement);
@@ -135,13 +137,38 @@ function addData() {
 // Function to Edit the data
 function editData() {
     modal.style.display = 'none';
+    let temp = empIdModal.value
 
     employees[arrNoModal.value].id = empIdModal.value;
     employees[arrNoModal.value].name = empNameModal.value;
     employees[arrNoModal.value].age = empAgeModal.value;
     employees[arrNoModal.value].gender = empGenderModal.value;
 
-    
+    if (temp == employees[arrNoModal.value].id)
+        updatedIds.push(temp)
+
     sortTable();
 }
 
+
+function deleteData(val) {
+
+
+    let newArray = employees.filter((employee) => {
+        return employees.indexOf(employee) != val
+    })
+
+    employees = [...newArray]
+
+    console.log(newArray)
+
+    sortTable();
+
+
+    if (tbody.childElementCount == 0) {
+        let newH3 = document.createElement('h3');
+        newH3.textContent = "Employee List is Empty";
+        newH3.className = 'empty-list';
+        tbody.append(newH3);
+    }
+}
