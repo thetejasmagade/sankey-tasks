@@ -35,8 +35,23 @@ const sortSelect = document.querySelector('.sort-select')
 // Getting Modal
 const modal = document.querySelector('.modal')
 
+// getting modal content div
+const modalContent = document.querySelector('.modal-content')
+
 // Getting Modal Close Button
 const closeModalButton = document.querySelector('.close-modal')
 
 // getting Hidden input array number
 const arrNoModal = document.querySelector('#arr-no')
+
+// Getting table parent div
+const tableDiv = document.querySelector('.table-div')
+
+// Getting theme button 
+const themeBtn = document.querySelector('.theme-btn')
+
+// Getting search box
+const searchInput = document.querySelector('.search-box')
+
+// Getting search result box
+const searchResBox = document.querySelector('.result-box')

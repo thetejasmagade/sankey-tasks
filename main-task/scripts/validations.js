@@ -28,6 +28,20 @@ function isAllDataFilled(val) {
 }
 
 
+function checkEverything(val){
+    let temp = false
+    
+    if(val){
+        if(((empIdModal.value && empNameModal.value && empAgeModal.value && empGenderModal.value) && (!errorIdModal.textContent && !errorNameModal.textContent && !errorAgeModal.textContent && !errorGenderModal.textContent)))
+            temp = true;
+    } else {
+        if (((empId.value && empName.value && empAge.value && empGender.value) && (!errorId.textContent && !errorName.textContent && !errorAge.textContent && !errorGender.textContent)))
+            temp = true;
+    }
+    return temp;
+}
+
+
 function showDisabledSort() {
     if (!showDisabledSortSelect) {
         sortSelect.removeAttribute('disabled');
@@ -58,7 +72,7 @@ function checkId(val) {
             showDisabledModal = true;
         } else {
             errorIdModal.textContent = "";
-            showDisabledModal = false;
+            checkEverything('modal') ? showDisabledModal = false : showDisabledModal = true;
         }
         isAllDataFilled('modal')
     } else {
@@ -71,12 +85,12 @@ function checkId(val) {
         } else if (isAlreadyInDeleted) {
             errorId.textContent = "Employee ID already used and Deleted.";
             showDisabled = true;
-        } else if(isAlreadyInUsed){
-            errorId.textContent = "Employee ID already Used for Another Employee.";
+        } else if (isAlreadyInUsed) {
+            errorId.textContent = "Employee ID already Assigned for Another Employee.";
             showDisabled = true;
         } else {
             errorId.textContent = "";
-            showDisabled = false;
+            checkEverything() ? showDisabled = false : showDisabled = true;
         }
         isAllDataFilled();
     }
@@ -101,7 +115,7 @@ function checkName(val) {
             showDisabledModal = true;
         } else {
             errorNameModal.textContent = "";
-            showDisabledModal = false;
+            checkEverything('modal') ? showDisabledModal = false : showDisabledModal = true;
         }
         isAllDataFilled('modal');
     }
@@ -120,7 +134,7 @@ function checkName(val) {
             showDisabled = true;
         } else {
             errorName.textContent = "";
-            showDisabled = false;
+            checkEverything() ? showDisabled = false : showDisabled = true;
         }
         isAllDataFilled();
     }
@@ -139,7 +153,7 @@ function checkAge(val) {
             showDisabledModal = true;
         } else {
             errorAgeModal.textContent = "";
-            showDisabledModal = false;
+            checkEverything('modal') ? showDisabledModal = false : showDisabledModal = true;
         }
 
         isAllDataFilled('modal');
@@ -152,9 +166,8 @@ function checkAge(val) {
             showDisabled = true;
         } else {
             errorAge.textContent = "";
-            showDisabled = false;
+            checkEverything() ? showDisabled = false : showDisabled = true;
         }
-
         isAllDataFilled();
     }
 }
@@ -170,7 +183,7 @@ function checkGender(val) {
             showDisabledModal = true;
         } else {
             errorGenderModal.textContent = "";
-            showDisabledModal = false;
+            checkEverything('modal') ? showDisabledModal = false : showDisabledModal = true;
         }
         isAllDataFilled('modal');
     } else {
@@ -179,7 +192,7 @@ function checkGender(val) {
             showDisabled = true;
         } else {
             errorGender.textContent = "";
-            showDisabled = false;
+            checkEverything() ? showDisabled = false : showDisabled = true;
         }
         isAllDataFilled();
     }

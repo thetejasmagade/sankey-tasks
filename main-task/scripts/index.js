@@ -4,20 +4,19 @@ let employees = [];
 // deleted ID's Entry
 let deletedIds = [];
 
-// 
 
 
 // Show heading when list is empty
 if (tbody.childElementCount == 0) {
     let newH3 = document.createElement('h3');
-    newH3.textContent = "Employee List is Empty";
-    newH3.className = 'empty-list';
-    tbody.append(newH3);
+    newH3.textContent = "Employee List is Empty ⛔";
+    newH3.className = 'empty-list-heading';
+    tableDiv.append(newH3);
 }
 
 // Function to handle Empty List Heading
 function emptyListHeadingFn() {
-    let emptyListHeading = document.querySelector('.empty-list');
+    let emptyListHeading = document.querySelector('.empty-list-heading');
     if (emptyListHeading)
         emptyListHeading.remove();
 }
@@ -29,14 +28,14 @@ function sortArray(val) {
         employees.sort((a, b) => a.id - b.id);
 
         for (var i = employees.length - 1; i >= 0; i--) {
-            employees[i].actions = `<button onclick="showModal(${i})">EDIT</button><button onclick="deleteData(${i})">DELETE</button>`
+            employees[i].actions = `<button onclick="showModal(${i})" class="edit-btn">EDIT</button><button onclick="deleteData(${i})" class="delete-btn">DELETE</button>`
         }
     }
     else {
         employees.sort((a, b) => b.id - a.id);
 
         for (var i = 0; i < employees.length; i++) {
-            employees[i].actions = `<button onclick="showModal(${i})">EDIT</button><button onclick="deleteData(${i})">DELETE</button>`;
+            employees[i].actions = `<button onclick="showModal(${i})" class="edit-btn">EDIT</button><button onclick="deleteData(${i})" class="delete-btn">DELETE</button>`;
         }
     }
 }
@@ -72,7 +71,7 @@ function showModal(val) {
     modal.style.display = 'block';
     showDisabledModal = false;
 
-    const thatTr = document.querySelector('#tr-' + val)
+    // const thatTr = document.querySelector('#tr-' + val)
 
     empIdModal.value = employees[val].id;
     empNameModal.value = employees[val].name;
@@ -88,11 +87,38 @@ function showModal(val) {
 function closeModal() {
     modal.style.display = 'none';
 
-    empIdModal.value = ""
-    empNameModal.value = ""
-    empAgeModal.value = ""
-    empGenderModal.value = ""
-    arrNoModal.value = ""
+    empIdModal.value = "";
+    empNameModal.value = "";
+    empAgeModal.value = "";
+    empGenderModal.value = "";
+    arrNoModal.value = "";
+}
+
+// Reset Form Functionality for normal form
+function resetForm() {
+    empId.value = "";
+    empName.value = "";
+    empAge.value = "";
+    empGender.value = "";
+
+    errorId.textContent = "";
+    errorName.textContent = "";
+    errorAge.textContent = "";
+    errorGender.textContent = "";
+}
+
+
+// Reset Form Functionality for Modal form
+function resetFormModal() {
+    empIdModal.value = "";
+    empNameModal.value = "";
+    empAgeModal.value = "";
+    empGenderModal.value = "";
+
+    errorIdModal.textContent = "";
+    errorNameModal.textContent = "";
+    errorAgeModal.textContent = "";
+    errorGenderModal.textContent = "";
 }
 
 
@@ -115,7 +141,8 @@ function addData() {
         <td>${empName.value}</td>
         <td>${empAge.value}</td>
         <td>${empGender.value}</td>
-        <td><button onclick="showModal(${employees.length - 1})">EDIT</button><button onclick="deleteData(${employees.length - 1})">DELETE</button></td>
+        <td><button onclick="showModal(${employees.length - 1})" class="
+        edit-btn">EDIT</button><button onclick="deleteData(${employees.length - 1})" class="delete-btn">DELETE</button></td>
         
     `
     tbody.append(newTrElement);
@@ -137,15 +164,11 @@ function addData() {
 // Function to Edit the data
 function editData() {
     modal.style.display = 'none';
-    let temp = empIdModal.value
 
     employees[arrNoModal.value].id = empIdModal.value;
     employees[arrNoModal.value].name = empNameModal.value;
     employees[arrNoModal.value].age = empAgeModal.value;
     employees[arrNoModal.value].gender = empGenderModal.value;
-
-    // if (temp == employees[arrNoModal.value].id)
-    //     updatedIds.push(temp)
 
     sortTable();
 }
@@ -154,27 +177,94 @@ function editData() {
 function deleteData(val) {
     deletedIds.push(employees[val].id)
 
-
     let newArray = employees.filter((employee) => {
         return employees.indexOf(employee) != val
     })
 
     employees = [...newArray]
 
-    console.log(newArray)
-
     sortTable();
-
-    console.log(val)
-
-    
-    console.log(deletedIds)
-
 
     if (tbody.childElementCount == 0) {
         let newH3 = document.createElement('h3');
-        newH3.textContent = "Employee List is Empty";
-        newH3.className = 'empty-list';
-        tbody.append(newH3);
+        newH3.textContent = "Employee List is Empty ⛔";
+        newH3.className = 'empty-list-heading';
+        tableDiv.append(newH3);
+    }
+}
+
+// function to handle theme
+function changeTheme() {
+    let body = document.body;
+    let labels = document.querySelectorAll('.label');
+    let inputs = document.querySelectorAll('.input');
+
+    if (themeBtn.value === '☀️') {
+        body.classList.toggle('dark-theme');
+        themeBtn.value = '🌓';
+        themeBtn.style.backgroundColor = 'white';
+        modalContent.style.backgroundColor = "white";
+        sortSelect.style.backgroundColor = "white";
+        sortSelect.style.color = "black";
+        searchInput.style.backgroundColor = "white";
+        searchInput.style.color = "black";
+        searchResBox.style.backgroundColor = "lightgray";
+        searchResBox.style.color = "black";
+    
+
+        for (let label of labels) label.style.color = "#4F626F"
+        for (let input of inputs) {
+            input.style.backgroundColor = "white"
+            input.style.color = "black";
+        }
+    } else {
+        body.classList.toggle('dark-theme');
+        themeBtn.value = '☀️';
+        themeBtn.style.backgroundColor = 'black'
+        modalContent.style.backgroundColor = "black";
+        sortSelect.style.backgroundColor = "#2F2F2F";
+        sortSelect.style.color = "white";
+        searchInput.style.backgroundColor = "#2F2F2F";
+        searchInput.style.color = "white";
+        searchResBox.style.backgroundColor = "#2F2F2F";
+        searchResBox.style.color = "white";
+
+        for (let label of labels) label.style.color = "lightgray";
+        for (let input of inputs) {
+            input.style.backgroundColor = "#2F2F2F";
+            input.style.color = "white";
+        }
+    }
+}
+
+
+
+function search() {
+    searchResBox.innerHTML = null
+    let newUl = document.createElement('ul');
+
+    if (searchInput.value) {
+        let results = employees.filter((employee) => {
+            return employee.name.toLowerCase().includes(searchInput.value.toLowerCase())
+        })
+
+
+        if (results.length > 0) {
+            for (let result of results) {
+                let index = employees.indexOf(result)
+                let newLi = document.createElement('li');
+                newLi.innerHTML = `
+                    <span class="search-result" onclick="showModal(${index})">${result.name}</span>
+                `
+                newUl.append(newLi)
+            }
+        } else {
+            let newLi = document.createElement('li');
+            newLi.innerHTML = `Employee Not Found`
+            newUl.append(newLi)
+        }
+
+
+        searchResBox.append(newUl)
     }
 }

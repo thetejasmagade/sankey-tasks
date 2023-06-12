@@ -1,166 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>📕 Employee Portal</title>
-    <link rel="stylesheet" href="./css/global.css" />
-  </head>
 
-  <body>
-    <div class="header-line"></div>
-    <main class="container">
-      <div class="form-div">
-        <h3>FORM 📜</h3>
-        <div class="form">
-          <label for="id" class="label">Employee Id:</label>
-          <input
-            oninput="checkId()"
-            type="number"
-            class="input"
-            name="id"
-            id="id"
-          />
-          <p class="error p-error-id"></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📕 Employee Portal</title>
+  <link rel="stylesheet" href="./css/global.css" />
+</head>
 
-          <label for="name" class="label">Employee Name:</label>
-          <input
-            oninput="checkName()"
-            type="text"
-            class="input"
-            name="name"
-            id="name"
-          />
-          <p class="error p-error-name"></p>
+<body>
+  <div class="header-line"></div>
+  <main class="container">
+    <div class="form-div">
+      <h3>FORM 📜</h3>
+      <div class="form">
+        <label for="id" class="label">Employee Id:</label>
+        <input oninput="checkId()" type="number" class="input" name="id" id="id" placeholder="1" />
+        <p class="error p-error-id"></p>
 
-          <label for="age" class="label">Employee Age:</label>
-          <input
-            oninput="checkAge()"
-            type="number"
-            class="input"
-            name="age"
-            min="18"
-            max="65"
-            id="age"
-          />
-          <p class="error p-error-age"></p>
+        <label for="name" class="label">Employee Name:</label>
+        <input oninput="checkName()" type="text" class="input" name="name" id="name" placeholder="John Doe" />
+        <p class="error p-error-name"></p>
 
-          <label for="gender" class="label">Employee Gender:</label>
-          <select
-            onchange="checkGender()"
-            class="input"
-            name="gender"
-            id="gender"
-          >
-            <option class="default-select" selected disabled hidden>
-              Select Gender
-            </option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Others</option>
-          </select>
-          <p class="error p-error-gender"></p>
+        <label for="age" class="label">Employee Age:</label>
+        <input oninput="checkAge()" type="number" class="input" name="age" min="18" max="65" id="age" placeholder="28" />
+        <p class="error p-error-age"></p>
 
-          <div class="form-buttons">
-            <button class="add-data-btn" onclick="addData()">Add Data</button>
-            <button class="reset-btn">Reset Form</button>
-          </div>
-        </div>
-      </div>
-      <div class="output-div">
-        <div class="output-bar">
-          <h3>EMPLOYEE LIST 📕</h3>
-          <div>
-            <select onchange="sortTable()" class="sort-select" disabled>
-              <option selected disabled hidden>Sort by ID's</option>
-              <option value="inc">Incremental ID's</option>
-              <option value="dec">Decremental ID's</option>
-            </select>
-          </div>
-        </div>
-        <div class="table-div">
-          <table class="table">
-            <thead>
-              <th>Employee ID</th>
-              <th>Employee Name</th>
-              <th>Employee Age</th>
-              <th>Employee Gender</th>
-              <th>Action</th>
-            </thead>
-            <tbody class="tbody"></tbody>
-          </table>
-        </div>
-      </div>
-    </main>
+        <label for="gender" class="label">Employee Gender:</label>
+        <select onchange="checkGender()" class="input" name="gender" id="gender">
+          <option class="default-select" selected disabled hidden>
+            Select Gender
+          </option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Others</option>
+        </select>
+        <p class="error p-error-gender"></p>
 
-    <!-- Modal Form -->
-    <div class="modal">
-      <div class="modal-content">
-        <button onclick="closeModal()" class="modal-close">❌</button>
-        <div class="form">
-          <label for="id" class="label">Employee Id:</label>
-          <input
-            oninput="checkId('modal')"
-            type="number"
-            class="input"
-            name="id"
-            id="id-modal"
-          />
-          <p class="error p-error-id-modal"></p>
-
-          <label for="name" class="label">Employee Name:</label>
-          <input
-            oninput="checkName('modal')"
-            type="text"
-            class="input"
-            name="name"
-            id="name-modal"
-          />
-          <p class="error p-error-name-modal"></p>
-
-          <label for="age" class="label">Employee Age:</label>
-          <input
-            oninput="checkAge('modal')"
-            type="number"
-            class="input"
-            name="age"
-            min="18"
-            max="65"
-            id="age-modal"
-          />
-          <p class="error p-error-age-modal"></p>
-
-          <label for="gender" class="label">Employee Gender:</label>
-          <select
-            onchange="checkGender('modal')"
-            class="input"
-            name="gender"
-            id="gender-modal"
-          >
-            <option class="default-select" selected disabled hidden>
-              Select Gender
-            </option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Others</option>
-          </select>
-          <p class="error p-error-gender-modal"></p>
-
-
-          <input type="number" id="arr-no">
-
-          <div class="form-buttons">
-            <button class="add-data-btn-modal" onclick="editData()">
-              Update Record
-            </button>
-            <button class="reset-btn">Reset Form</button>
-          </div>
+        <div class="form-buttons">
+          <button class="add-data-btn" onclick="addData()">Add Data</button>
+          <button class="reset-btn" onclick="resetForm()">Reset Form</button>
         </div>
       </div>
     </div>
+    <div class="output-div">
+      <div class="output-bar">
+        <h3>EMPLOYEE LIST 📕</h3>
+        <div class="output-bar-tool">
+          <div class="search-div">
+            <input type="text" oninput="search()" class="search-box" placeholder="Search by Entering Name">
+            <div class="result-box">
+            </div>
+          </div>
+          <select onchange="sortTable()" class="sort-select" disabled>
+            <option selected disabled hidden>Sort by ID's</option>
+            <option value="inc">Incremental ID's ⬆️</option>
+            <option value="dec">Decremental ID's ⬇️</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-div">
+        <table class="table">
+          <thead>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Employee Age</th>
+            <th>Employee Gender</th>
+            <th>Action</th>
+          </thead>
+          <tbody class="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
 
-    <script src="./scripts/selectors.js"></script>
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/validations.js"></script>
-  </body>
+
+
+  <!-- Modal Form -->
+  <div class="modal">
+    <div class="modal-content">
+      <button onclick="closeModal()" class="modal-close">❌</button>
+      <div class="form">
+        <label for="id" class="label">Employee Id:</label>
+        <input oninput="checkId('modal')" type="number" class="input" name="id" id="id-modal" />
+        <p class="error p-error-id-modal"></p>
+
+        <label for="name" class="label">Employee Name:</label>
+        <input oninput="checkName('modal')" type="text" class="input" name="name" id="name-modal" />
+        <p class="error p-error-name-modal"></p>
+
+        <label for="age" class="label">Employee Age:</label>
+        <input oninput="checkAge('modal')" type="number" class="input" name="age" min="18" max="65" id="age-modal" />
+        <p class="error p-error-age-modal"></p>
+
+        <label for="gender" class="label">Employee Gender:</label>
+        <select onchange="checkGender('modal')" class="input" name="gender" id="gender-modal">
+          <option class="default-select" selected disabled hidden>
+            Select Gender
+          </option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Others</option>
+        </select>
+        <p class="error p-error-gender-modal"></p>
+
+
+        <input type="hidden" id="arr-no">
+
+        <div class="form-buttons">
+          <button class="add-data-btn-modal" onclick="editData()">
+            Update Record
+          </button>
+          <button class="reset-btn" onclick="resetFormModal()">Reset Form</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <input type="button" class="theme-btn" value="🌓" onclick="changeTheme()" readonly>
+
+  <script src="./scripts/selectors.js"></script>
+  <script src="./scripts/index.js"></script>
+  <script src="./scripts/validations.js"></script>
+</body>
+
 </html>
