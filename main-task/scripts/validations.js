@@ -61,7 +61,9 @@ function checkId(val) {
     let isAlreadyInDeleted = deletedIds.find(id => id == empIdVal) ? true : false;
     let isAlreadyInUsed = employees.find(employee => employee.id == empIdVal) ? true : false;
 
-    console.log(isAlreadyInDeleted);
+    let isAlreadyInDeletedModal = deletedIds.find(id => id == empIdValModal) ? true : false;
+    let isAlreadyInUsedModal = employees.find(employee => employee.id == empIdValModal) ? true : false;
+
 
     if (val == 'modal') {
         if (empIdValModal < 0) {
@@ -69,6 +71,12 @@ function checkId(val) {
             showDisabledModal = true;
         } else if (!empIdValModal) {
             errorIdModal.textContent = "Employee ID should Not Empty.";
+            showDisabledModal = true;
+        }  else if (isAlreadyInDeletedModal) {
+            errorIdModal.textContent = "Employee ID already Used and Deleted.";
+            showDisabledModal = true;
+        } else if (isAlreadyInUsedModal) {
+            errorIdModal.textContent = "Employee ID already Assigned for Another Employee.";
             showDisabledModal = true;
         } else {
             errorIdModal.textContent = "";
@@ -83,7 +91,7 @@ function checkId(val) {
             errorId.textContent = "Employee ID should Not Empty.";
             showDisabled = true;
         } else if (isAlreadyInDeleted) {
-            errorId.textContent = "Employee ID already used and Deleted.";
+            errorId.textContent = "Employee ID already Used and Deleted.";
             showDisabled = true;
         } else if (isAlreadyInUsed) {
             errorId.textContent = "Employee ID already Assigned for Another Employee.";

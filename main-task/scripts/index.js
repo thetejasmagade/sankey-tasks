@@ -27,15 +27,15 @@ function sortArray(val) {
     if (val == 'inc') {
         employees.sort((a, b) => a.id - b.id);
 
-        for (var i = employees.length - 1; i >= 0; i--) {
-            employees[i].actions = `<button onclick="showModal(${i})" class="edit-btn">EDIT</button><button onclick="deleteData(${i})" class="delete-btn">DELETE</button>`
+        for (var i = 0; i < employees.length; i++) {
+            employees[i].index = i;
         }
     }
     else {
         employees.sort((a, b) => b.id - a.id);
 
         for (var i = 0; i < employees.length; i++) {
-            employees[i].actions = `<button onclick="showModal(${i})" class="edit-btn">EDIT</button><button onclick="deleteData(${i})" class="delete-btn">DELETE</button>`;
+            employees[i].index = i;
         }
     }
 }
@@ -59,7 +59,7 @@ function sortTable() {
         <td>${employees[employee].name}</td>
         <td>${employees[employee].age}</td>
         <td>${employees[employee].gender}</td>
-        <td>${employees[employee].actions}</td>
+        <td><button onclick="showModal(${employees[employee].index})" class="edit-btn">EDIT</button><button onclick="deleteData(${employees[employee].index})" class="delete-btn">DELETE</button></td>
     `
 
         tbody.append(newTrElement);
@@ -99,12 +99,15 @@ function resetForm() {
     empId.value = "";
     empName.value = "";
     empAge.value = "";
-    empGender.value = "";
+    empGender.value = "Select Gender";
 
     errorId.textContent = "";
     errorName.textContent = "";
     errorAge.textContent = "";
     errorGender.textContent = "";
+
+    showDisabled = true;
+    isAllDataFilled();
 }
 
 
@@ -113,12 +116,15 @@ function resetFormModal() {
     empIdModal.value = "";
     empNameModal.value = "";
     empAgeModal.value = "";
-    empGenderModal.value = "";
+    empGenderModal.value = "Select Gender";
 
     errorIdModal.textContent = "";
     errorNameModal.textContent = "";
     errorAgeModal.textContent = "";
     errorGenderModal.textContent = "";
+
+    showDisabledModal = true;
+    isAllDataFilled('modal');
 }
 
 
@@ -129,7 +135,7 @@ function addData() {
         name: empName.value,
         age: Number(empAge.value),
         gender: empGender.value,
-        actions: `<button onclick="showModal(${employees.length - 1})">EDIT</button><button onclick="deleteData(${employees.length - 1})">DELETE</button>`
+        index: employees.length - 1
     })
 
     emptyListHeadingFn();
@@ -150,7 +156,7 @@ function addData() {
     empId.value = '';
     empName.value = '';
     empAge.value = '';
-    empGender.value = '';
+    empGender.value = 'Select Gender';
 
     showDisabled = true;
     isAllDataFilled();
@@ -255,7 +261,6 @@ function search() {
             return employee.name.toLowerCase().includes(searchInput.value.toLowerCase())
         })
 
-
         if (results.length > 0) {
             for (let result of results) {
                 let index = employees.indexOf(result)
@@ -270,7 +275,6 @@ function search() {
             newLi.innerHTML = `Employee Not Found`
             newUl.append(newLi)
         }
-
 
         searchResBox.append(newUl)
     }
