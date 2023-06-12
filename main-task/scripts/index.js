@@ -158,6 +158,13 @@ function addData() {
     showDisabledSortSelect = false;
     showDisabledSort();
 
+
+    // To fix bug when new data is added in dark mode
+    if (document.body.classList.contains('dark-theme')) {
+        sortSelect.style.color = "white";
+    } else {
+        sortSelect.style.color = "black";
+    }
 }
 
 
@@ -210,7 +217,7 @@ function changeTheme() {
         searchInput.style.color = "black";
         searchResBox.style.backgroundColor = "lightgray";
         searchResBox.style.color = "black";
-    
+
 
         for (let label of labels) label.style.color = "#4F626F"
         for (let input of inputs) {
@@ -238,7 +245,7 @@ function changeTheme() {
 }
 
 
-
+// Function to handle search
 function search() {
     searchResBox.innerHTML = null
     let newUl = document.createElement('ul');
